@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.cardview.widget.CardView
+        app:cardElevation="8dp"
+        android:id="@+id/user_info_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:padding="@dimen/default_padding"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/user_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/TextView.Primary.Header"
+                android:layout_marginTop="@dimen/margin_tv"
+                android:text="@{mdvm.author}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_image_view"
+                tools:text="Name" />
+
+            <TextView
+                android:id="@+id/tv_user_nickname"
+                style="@style/TextView.Secondary"
+                android:layout_marginTop="@dimen/margin_tv"
+                android:text="@{mdvm.nickname}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                tools:text="Nickname" />
+
+            <TextView
+                android:id="@+id/tv_user_description"
+                style="@style/TextView.Primary"
+                android:layout_marginTop="@dimen/margin_tv"
+                android:text="@{mdvm.discription}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_nickname"
+                tools:text="Description" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_user_icon_calendar"
+                    style="@style/TextIcon"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:text="@string/calendar_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_description" />
+
+                <TextView
+                    android:id="@+id/tv_user_calendar"
+                    style="@style/TextView.Secondary"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:text="@{mdvm.location}"
+                    app:layout_constraintStart_toEndOf="@id/tv_user_icon_calendar"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_description"
+                    tools:text="Location" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_user_count_following"
+                    style="@style/TextView.Primary.Bold"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:text="@{mdvm.followingCount}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_calendar"
+                    tools:text="4" />
+
+                <TextView
+                    android:id="@+id/tv_user_following"
+                    style="@style/TextView.Secondary"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:text="@string/following"
+                    app:layout_constraintStart_toEndOf="@id/tv_user_count_following"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_calendar" />
+
+                <TextView
+                    android:id="@+id/tv_user_count_followers"
+                    style="@style/TextView.Primary.Bold"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:text="@{mdvm.followersCount}"
+                    app:layout_constraintStart_toEndOf="@id/tv_user_following"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_calendar"
+                    tools:text="5" />
+
+                <TextView
+                    android:id="@+id/tv_user_followers"
+                    style="@style/TextView.Secondary"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:text="@string/followers"
+                    app:layout_constraintStart_toEndOf="@id/tv_user_count_followers"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_calendar" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.twitterok.viewmodel.MainDataViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:onClick="@{(v) -> viewModel.clickOnTweet(v)}"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_padding">
+            <!-- TODO add avatar downloader method from VM -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:onClick="@{(v) -> viewModel.clickOnProfileImage(v)}"
+                android:id="@+id/iv_tweet_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="@dimen/margin_tv"
+                app:profileImage="@{viewModel.profileImageUrl}"
+                tools:src="@mipmap/ic_launcher"
+                app:civ_border_color="@color/colorAccent"
+                app:civ_border_width="0.5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_tweet_author_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        style="@style/TextView.Primary.Bold"
+                        android:layout_marginStart="@dimen/margin_tv"
+                        android:text="@{viewModel.author}"
+                        tools:text="Author" />
+
+                    <TextView
+                        android:id="@+id/tv_tweet_author_nickname"
+                        style="@style/TextView.Secondary"
+                        android:layout_marginStart="@dimen/margin_tv"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_width="0dp"
+                        android:text="@{viewModel.nickname}"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_tweet_icon_date"
+                        app:layout_constraintStart_toEndOf="@id/tv_tweet_author_name"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Nickname" />
+                    <TextView
+                        android:id="@+id/tv_tweet_icon_date"
+                        style="@style/TextIcon"
+                        android:text="@string/clock_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tv_tweet_date"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/tv_tweet_date"
+                        style="@style/TextView.Secondary"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/margin_tv"
+                        android:text="@{viewModel.date}"
+                        tools:text="Nov.27" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_tweet_author_description"
+                    style="@style/TextView.Primary"
+                    android:layout_marginStart="@dimen/margin_tv"
+                    android:text="@{viewModel.discription}"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    tools:text="Today_I_have_gonna_show_you_a_small_pines_and_a_large_vagina_with_a_toys_into"/>
+                <!-- TODO add main picture downloader method from VM -->
+                <ImageView
+                    android:background="@drawable/round_shape"
+                    android:id="@+id/iv_main_tweet_picture"
+                    android:layout_width="match_parent"
+                    android:adjustViewBounds="true"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="@dimen/margin_tv"
+                    android:layout_marginTop="@dimen/margin_tv"
+                    android:layout_marginBottom="@dimen/margin_tv"
+                    android:scaleType="centerCrop"
+                    app:contentImage="@{viewModel.mediaEntitiesUrl}"
+                    tools:src="@drawable/temp_picture" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_tv"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_tweet_like_icon"
+                            style="@style/TextIcon"
+                            android:text="@string/retweet_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_tweet_like_count"
+                            style="@style/TextView.Secondary"
+                            android:layout_marginStart="@dimen/margin_tv"
+                            android:text="@{viewModel.likeCount}"
+                            tools:text="0" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_tweet_retweet_icon"
+                            style="@style/TextIcon"
+                            android:text="@string/like_icon" />
+
+                        <TextView
+                            android:id="@+id/tv_tweet_retweet_count"
+                            style="@style/TextView.Secondary"
+                            android:layout_marginStart="@dimen/margin_tv"
+                            android:text="@{viewModel.retweetCount}"
+                            tools:text="0"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

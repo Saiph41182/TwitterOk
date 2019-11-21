@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Twitterok</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY" tools:ignore="ExtraTranslation">4Ik5pkJtCEuU7tNnto04F87GP</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET" tools:ignore="ExtraTranslation">5Fjbgof0FLKHdH6zUmpFKwvwKWOLiEQUZD5ytJlO0halgRv9x8</string>
+
+    <string name="clock_icon">\uf017\u0020</string>
+    <string name="calendar_icon">\uf073</string>
+    <string name="retweet_icon">\uf08a</string>
+    <string name="like_icon">\uf079</string>
+    <string name="settings_icon">\uf013</string>
+    <string name="home_icon">\uf015</string>
+    <string name="search_icon">\uf002</string>
+    <string name="add_user">\uf234</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="add_a_new_tweet">Add a new tweet</string>
+    <string name="add">Add</string>
+    <string name="what_s_new">What`s new?</string>
+</resources>

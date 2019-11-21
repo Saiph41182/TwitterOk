@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.twitterok.viewmodel.OwnerViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bar_size"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            tools:src="@mipmap/ic_launcher"
+            android:layout_gravity="center_vertical"
+            app:profileImgBitmap="@{viewModel.imageBitmap}">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <TextView
+            style="@style/Text.Primary.Header"
+            android:id="@+id/tv_header_item_tweet"
+            android:text="@{viewModel.name}"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:text="Main">
+        </TextView>
+    </LinearLayout>
+</layout>
