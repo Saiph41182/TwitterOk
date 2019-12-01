@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.twitterok.App;
 import com.example.twitterok.R;
-import com.example.twitterok.adapters.MainAdapter;
-import com.example.twitterok.internet.MyTwitterApiClient;
+import com.example.twitterok.view.adapters.MainAdapter;
+import com.example.twitterok.repository.internet.TwitterApiProvider;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -32,9 +32,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void downloadData(MainAdapter adapter) {
-        MyTwitterApiClient twitterApiClient = new MyTwitterApiClient(App.getSession());
+        TwitterApiProvider twitterApiClient = new TwitterApiProvider(App.getSession());
         Disposable disposable = twitterApiClient
-                .getHomeTimeline(200,App.getOwner().getScreenName())
+                .getUserTimeline(200,App.getOwner().getScreenName())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> adapter.updateData(data));
