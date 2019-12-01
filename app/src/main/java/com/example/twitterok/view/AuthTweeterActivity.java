@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.example.twitterok.R;
-import com.example.twitterok.adapters.AuthAdapter;
-import com.example.twitterok.internet.MyTwitterApiClient;
-import com.example.twitterok.realm.RealmAccountModel;
+import com.example.twitterok.view.adapters.AuthAdapter;
+import com.example.twitterok.repository.internet.TwitterApiProvider;
+import com.example.twitterok.repository.realm.RealmAccountModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.Callback;
@@ -78,7 +78,7 @@ public class AuthTweeterActivity extends AppCompatActivity {
     }
 
     private void initRealmAccount(TwitterSession session){
-        Disposable disposable = new MyTwitterApiClient(session)
+        Disposable disposable = new TwitterApiProvider(session)
                 .getUser(session.getUserId())
                 .subscribeOn(Schedulers.io())
                 .map(user -> new RealmAccountModel(
