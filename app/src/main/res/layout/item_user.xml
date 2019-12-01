@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twitterok.viewmodel.UserViewModel" />
+            type="com.example.twitterok.databinding.viewmodel.UserViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
