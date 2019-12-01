@@ -7,9 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.twitterok.App;
-import com.example.twitterok.internet.MyTwitterApiClient;
-import com.example.twitterok.viewmodel.OwnerViewModel;
-import com.example.twitterok.viewmodel.UserViewModel;
+import com.example.twitterok.databinding.viewmodel.OwnerViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 import android.view.LayoutInflater;
@@ -17,12 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.twitterok.R;
 import com.example.twitterok.databinding.FragmentBottomNavMenuBinding;
-import com.example.twitterok.model.TweetModel;
-import com.example.twitterok.viewmodel.MainDataViewModel;
-import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.models.User;
-
-import io.realm.Realm;
 
 public class BottomNavigationDrawerFragment extends BottomSheetDialogFragment {
 
