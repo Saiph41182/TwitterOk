@@ -1,4 +1,4 @@
-package com.example.twitterok.viewmodel;
+package com.example.twitterok.databinding.viewmodel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,11 +7,10 @@ import android.view.View;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.BindingAdapter;
 
 import com.example.twitterok.App;
 import com.example.twitterok.Utils.TwitterDateParser;
-import com.example.twitterok.realm.RealmAccountModel;
+import com.example.twitterok.repository.realm.RealmAccountModel;
 import com.example.twitterok.view.MainActivity;
 import com.twitter.sdk.android.core.TwitterSession;
 
