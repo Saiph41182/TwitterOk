@@ -1,30 +1,18 @@
-package com.example.twitterok.viewmodel;
-
-import android.content.Context;
-import android.content.Intent;
-import android.view.View;
-import android.widget.Toast;
+package com.example.twitterok.databinding.viewmodel;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.ViewDataBinding;
 
-import com.example.twitterok.App;
 import com.example.twitterok.Utils.TwitterDateParser;
-import com.example.twitterok.realm.RealmAccountModel;
-import com.example.twitterok.view.MainActivity;
-import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.User;
 
-import io.realm.Realm;
-
 public class UserViewModel extends BaseObservable {
+
     private User user;
 
     public UserViewModel(User user) {
         this.user = user;
     }
-
 
     @Bindable
     public String getImageUrl() {
@@ -62,6 +50,5 @@ public class UserViewModel extends BaseObservable {
         dateParser.setDateJson(user.createdAt);
         return dateParser.wasCreated();
     }
-
 
 }
