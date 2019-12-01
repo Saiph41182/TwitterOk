@@ -1,29 +1,20 @@
-package com.example.twitterok.viewmodel;
+package com.example.twitterok.databinding.viewmodel;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.BindingMethod;
 
-import com.example.twitterok.R;
 import com.example.twitterok.Utils.TwitterDateParser;
 import com.example.twitterok.model.TweetModel;
-import com.squareup.picasso.Picasso;
-import com.twitter.sdk.android.core.models.Tweet;
 
-import java.util.Calendar;
-
-public class MainDataViewModel extends BaseObservable {
+public class TweetViewModel extends BaseObservable {
 
     private TweetModel tweetModel;
 
-    public MainDataViewModel(TweetModel tweetModel) {
+    public TweetViewModel(TweetModel tweetModel) {
         this.tweetModel = tweetModel;
     }
 
