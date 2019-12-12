@@ -14,17 +14,16 @@ public class MainAdapter extends BaseAdapter<TweetModel>{
 
     public MainAdapter(@LayoutRes int layoutId){
         this.layoutId = layoutId;
-        setHeader(R.layout.header_item_tweet_view);
     }
 
     @Override
     protected Object getObjectForPosition(int position) {
-        return position == 0 ? new OwnerViewModel(App.getOwner()) : new TweetViewModel(data.get(position));
+        return new TweetViewModel(data.get(position));
     }
 
     @Override
     protected int getLayoutIdForPosition(int position) {
-        return position == 0 ? header : layoutId;
+        return layoutId;
     }
 
 }

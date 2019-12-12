@@ -14,16 +14,15 @@ public class SearchAdapter extends BaseAdapter<User>  {
 
     public SearchAdapter(@LayoutRes int layoutRes) {
         this.layoutRes = layoutRes;
-        setHeader(R.layout.header_item_tweet_view);
     }
 
     @Override
     protected Object getObjectForPosition(int position) {
-        return position == 0 ? new OwnerViewModel(App.getOwner()) : new UserViewModel(data.get(position));
+        return new UserViewModel(data.get(position));
     }
 
     @Override
     protected int getLayoutIdForPosition(int position) {
-        return position == 0 ? header : layoutRes;
+        return layoutRes;
     }
 }
