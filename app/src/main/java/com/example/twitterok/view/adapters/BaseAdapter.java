@@ -58,11 +58,17 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Co
         return data.size();
     }
 
-    public void updateData(@Nullable List<T> data){
+    public void updateData(@Nullable List<T> data, boolean isReplaced){
+
         if(data == null || data.isEmpty()){
             this.data.clear();
         }else {
-            this.data.addAll(data);
+            if(isReplaced){
+                this.data.clear();
+                this.data.addAll(data);
+            } else{
+                this.data.addAll(data);
+            }
         }
         notifyDataSetChanged();
     }
