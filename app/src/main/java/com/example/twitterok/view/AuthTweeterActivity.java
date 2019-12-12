@@ -73,7 +73,7 @@ public class AuthTweeterActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if (!realm.isEmpty()){
-            adapter.updateData(realm.where(RealmAccountModel.class).findAll());
+            adapter.updateData(realm.where(RealmAccountModel.class).findAll(),false);
         }
     }
 
