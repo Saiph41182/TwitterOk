@@ -3,6 +3,7 @@ package com.example.twitterok.databinding.viewmodel;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 
 import androidx.databinding.BaseObservable;
@@ -77,6 +78,10 @@ public class OwnerViewModel extends BaseObservable {
         App.setSession(twitterSession);
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
+    }
+
+    public void showDrawer(View view){
+        ((MainActivity)view.getContext()).showDrawer();
     }
 
 }
