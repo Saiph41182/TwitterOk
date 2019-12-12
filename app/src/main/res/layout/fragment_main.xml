@@ -1,12 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.twitterok.databinding.viewmodel.TimelineViewModel" />
+
+        <variable
+            name="ownerVM"
+            type="com.example.twitterok.databinding.viewmodel.OwnerViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/timeline_recycler_view"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.AppBarLayout
+                style="@style/Widget.MaterialComponents.AppBarLayout.Surface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/materialToolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:backgroundTint="@color/design_default_color_secondary"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bar_size"
+                        android:background="@android:color/transparent"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            profileImgBitmap="@{ownerVM.imageBitmap}"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_gravity="center_vertical"
+                            android:onClick="@{(v) -> ownerVM.showDrawer(v)}"
+                            android:src="@mipmap/ic_launcher"
+                            tools:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/tv_header_item_tweet"
+                            style="@style/Text.Primary.Header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:text="@{ownerVM.name}"
+                            tools:text="Main" />
+                    </LinearLayout>
+
+                </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/timeline_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
+                app:adapter="@{viewModel.adapter}"
+                app:data="@{viewModel.data}"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:visibility="gone" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <ProgressBar
+            android:id="@+id/main_fragment_progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
     </LinearLayout>
+</layout>
