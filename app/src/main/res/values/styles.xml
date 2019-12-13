@@ -73,4 +73,15 @@
     <style name="Text.Secondary">
         <item name="android:textColor">@color/gray_dove_light</item>
     </style>
+
+    <style name="CollapsingToolbarTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="ExpandedToolbarTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
 </resources>
