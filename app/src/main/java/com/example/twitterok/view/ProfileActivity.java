@@ -6,6 +6,7 @@ import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +21,8 @@ import com.example.twitterok.databinding.viewmodel.ProfileTimelineViewModel;
 import com.example.twitterok.databinding.viewmodel.TimelineViewModel;
 import com.example.twitterok.view.adapters.MainAdapter;
 import com.example.twitterok.repository.internet.TwitterApiProvider;
+import com.google.android.material.appbar.AppBarLayout;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -37,17 +40,18 @@ public class ProfileActivity extends AppCompatActivity {
         binding.setOwnerVM(new OwnerViewModel(App.getOwner()));
         viewModel = new ProfileTimelineViewModel();
         binding.setViewModel(viewModel);
-        binding.profileBaseInfo.setOnClickListener(view -> {
-            LinearLayout expendableView = binding.expendableView;
-            if(expendableView.getVisibility() == View.GONE){
+        binding.profileFab.setOnClickListener(view ->{
+            LinearLayout expendableView = binding.profileInnerAppBar;
+            if(expendableView.getHeight() == 0){
                 TransitionManager.beginDelayedTransition(binding.profileAppBar,new AutoTransition());
-                expendableView.setVisibility(View.VISIBLE);
-                binding.profileArrowBtn.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                expendableView.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                binding.profileFab.setImageDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_up_black_24dp));
             }else{
                 TransitionManager.beginDelayedTransition(binding.profileAppBar,new AutoTransition());
-                expendableView.setVisibility(View.GONE);
-                binding.profileArrowBtn.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                expendableView.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0));
+                binding.profileFab.setImageDrawable(getResources().getDrawable(R.drawable.ic_keyboard_arrow_down_black_24dp));
             }
+
         });
     }
 
