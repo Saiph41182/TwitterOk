@@ -68,9 +68,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean showDrawer(){
+    public void showDrawer(){
         mainDrawer.openDrawer(GravityCompat.START);
-        return true;
     }
 
     private void initNavView(){
