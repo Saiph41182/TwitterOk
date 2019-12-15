@@ -20,12 +20,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.twitterok.App;
+import com.example.twitterok.BR;
 import com.example.twitterok.R;
 import com.example.twitterok.databinding.FragmentSearchBinding;
 import com.example.twitterok.databinding.viewmodel.OwnerViewModel;
 import com.example.twitterok.databinding.viewmodel.SearchUsersViewModel;
+import com.example.twitterok.databinding.viewmodel.TimelineViewModel;
 import com.example.twitterok.view.adapters.SearchAdapter;
 import com.example.twitterok.repository.internet.TwitterApiProvider;
+import com.twitter.sdk.android.core.models.User;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -34,53 +37,23 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SearchFragment extends Fragment {
-
-    private SearchUsersViewModel viewModel;
-
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if(viewModel != null){
-            viewModel.setUp();
-        }
-    }
+public class SearchFragment extends BaseFragment<User> {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         FragmentSearchBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search,container,false);
         binding.etHeaderItemSearch.setOnEditorActionListener(onEditorActionListener);
-        View view = binding.getRoot();
-        initRecyclerView(view);
-        initViewBinding(binding);
-        return view;
+        initRecyclerView(binding);
+        initViewModel(new SearchUsersViewModel());
+        initVariable(binding, com.example.twitterok.BR.viewModel,viewModel);
+        initVariable(binding,BR.ownerVM,new OwnerViewModel(App.getOwner()));
+        return binding.getRoot();
     }
 
-    private void initViewBinding(FragmentSearchBinding binding) {
-        if(viewModel == null){
-            viewModel = new SearchUsersViewModel();
-        }
-        binding.setViewModel(viewModel);
-        binding.setOwnerVM(new OwnerViewModel(App.getOwner()));
-        binding.executePendingBindings();
-    }
-
-    private void initRecyclerView(View view){
-        RecyclerView recyclerView = view.findViewById(R.id.users_list);
+    private void initRecyclerView(FragmentSearchBinding binding){
+        RecyclerView recyclerView = binding.usersList;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(viewModel != null){
-            viewModel.tearDown();
-        }
     }
 
     private TextView.OnEditorActionListener onEditorActionListener = (v, actionId, event) -> {
