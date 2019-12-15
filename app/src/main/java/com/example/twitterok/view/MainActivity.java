@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         initNavView();
         bottomNavView.setOnNavigationItemSelectedListener(selectedListener);
         if (savedInstanceState == null) {
-            beginFragment(new MainFragment());
+            beginFragment(new HomeFragment());
         }
     }
 
@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!getSupportFragmentManager().findFragmentById(R.id.main_frame_layout).getTag().equals(MainFragment.class.getSimpleName())) {
+        if (!getSupportFragmentManager().findFragmentById(R.id.main_frame_layout).getTag().equals(HomeFragment.class.getSimpleName())) {
             bottomNavView.setSelectedItemId(R.id.bn_home);
-            beginFragment(new MainFragment());
+            beginFragment(new HomeFragment());
         } else {
             super.onBackPressed();
         }
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     private OnNavigationItemSelectedListener selectedListener = item -> {
         switch (item.getItemId()) {
             case R.id.bn_home:
-                beginFragment(new MainFragment());
+                beginFragment(new HomeFragment());
                 break;
             case R.id.bn_search:
                 beginFragment(new SearchFragment());
