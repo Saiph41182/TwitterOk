@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="ownerVM"
-            type="com.example.twitterok.databinding.viewmodel.OwnerViewModel" />
+            name="userViewModel"
+            type="com.example.twitterok.databinding.viewmodel.UserViewModel" />
 
         <variable
             name="viewModel"
@@ -50,7 +50,7 @@
                     app:layout_collapseMode="parallax" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    profileImgBitmap="@{ownerVM.imageBitmap}"
+                    profileImage="@{userViewModel.imageUrl}"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_margin="16dp"
@@ -59,7 +59,7 @@
                     tools:src="@mipmap/ic_launcher" />
 
                 <com.google.android.material.appbar.MaterialToolbar
-                    app:title="@{ownerVM.name}"
+                    app:title="@{userViewModel.name}"
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
                     app:contentInsetStart="16dp"
@@ -90,7 +90,7 @@
                     <TextView
                         android:id="@+id/tv_user_description"
                         style="@style/TextView.Primary"
-                        android:text="@{ownerVM.description}"
+                        android:text="@{userViewModel.description}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_user_nickname"
                         tools:text="Description" />
@@ -114,7 +114,7 @@
                             style="@style/TextView.Secondary"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="@dimen/margin_tv"
-                            android:text="@{ownerVM.createdAt}"
+                            android:text="@{userViewModel.createdAt}"
                             app:layout_constraintStart_toEndOf="@id/tv_user_icon_calendar"
                             app:layout_constraintTop_toBottomOf="@id/tv_user_description"
                             tools:text="Location" />
@@ -129,7 +129,7 @@
                             android:id="@+id/tv_user_count_following"
                             style="@style/TextView.Primary.Bold"
                             android:layout_marginTop="@dimen/margin_tv"
-                            android:text="@{ownerVM.followingCount}"
+                            android:text="@{userViewModel.followingCount}"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_user_calendar"
                             tools:text="4" />
@@ -148,7 +148,7 @@
                             style="@style/TextView.Primary.Bold"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="@dimen/margin_tv"
-                            android:text="@{ownerVM.followersCount}"
+                            android:text="@{userViewModel.followersCount}"
                             app:layout_constraintStart_toEndOf="@id/tv_user_following"
                             app:layout_constraintTop_toBottomOf="@id/tv_user_calendar"
                             tools:text="5" />
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
-            app:fabSize="auto"
+            app:fabSize="mini"
             app:layout_anchor="@id/profile_app_bar"
             app:layout_anchorGravity="bottom|end|right">
 
