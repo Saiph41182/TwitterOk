@@ -1,11 +1,13 @@
 package com.example.twitterok.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -18,28 +20,34 @@ import com.example.twitterok.R;
 import com.example.twitterok.databinding.ActivityProfileBinding;
 import com.example.twitterok.databinding.viewmodel.OwnerViewModel;
 import com.example.twitterok.databinding.viewmodel.ProfileTimelineViewModel;
-import com.example.twitterok.databinding.viewmodel.TimelineViewModel;
-import com.example.twitterok.view.adapters.MainAdapter;
-import com.example.twitterok.repository.internet.TwitterApiProvider;
+import com.example.twitterok.databinding.viewmodel.UserViewModel;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.twitter.sdk.android.core.models.User;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import java.lang.reflect.Type;
 
 public class ProfileActivity extends AppCompatActivity {
 
 
     private ProfileTimelineViewModel viewModel;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityProfileBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_profile);
         initRecyclerView(binding.getRoot());
-        binding.setOwnerVM(new OwnerViewModel(App.getOwner()));
-        viewModel = new ProfileTimelineViewModel();
+        Gson gson = new GsonBuilder().create();
+        Intent intent = getIntent();
+        if(intent != null && intent.hasExtra("user_json")){
+            initViewModels(gson.fromJson(intent.getStringExtra("user_json"), User.class));
+        }else{
+            //initViewModels(App.getOwner());
+        }
         binding.setViewModel(viewModel);
+        binding.setUserViewModel(userViewModel);
         binding.profileFab.setOnClickListener(view ->{
             LinearLayout expendableView = binding.profileInnerAppBar;
             if(expendableView.getHeight() == 0){
@@ -53,6 +61,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void initViewModels(User user) {
+        userViewModel = new UserViewModel(user);
+        viewModel = new ProfileTimelineViewModel(user.screenName);
     }
 
     @Override
