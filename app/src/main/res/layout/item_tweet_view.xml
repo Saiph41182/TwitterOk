@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.example.twitterok.databinding.viewmodel.TweetViewModel" />
+
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
@@ -17,9 +19,10 @@
 
         <com.google.android.material.card.MaterialCardView
             style="@style/Widget.MaterialComponents.CardView"
+            android:id="@+id/cv_tweet_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{(v) -> viewModel.clickOnTweet(v)}"
+            android:onClick="@{(v) -> viewModel.onClick(v,viewModel.stringId)}"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -27,15 +30,12 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="@dimen/default_padding">
-                <!-- TODO add avatar downloader method from VM -->
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_tweet_icon"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="@dimen/margin_tv"
-                    android:onClick="@{(v) -> viewModel.clickOnProfileImage(v)}"
-                    app:civ_border_color="@color/colorAccent"
-                    app:civ_border_width="0.5dp"
+                    android:onClick="@{(v) -> viewModel.onClick(v,viewModel.userJson)}"
                     app:profileImage="@{viewModel.profileImageUrl}"
                     tools:src="@mipmap/ic_launcher" />
 
@@ -95,22 +95,41 @@
                         android:id="@+id/tv_tweet_author_description"
                         style="@style/TextView.Primary"
                         android:layout_marginStart="@dimen/margin_tv"
-                        android:autoLink="web"
-                        android:linksClickable="true"
-                        android:text="@{viewModel.discription}"
-                        tools:text="Today_I_have_gonna_show_you_a_small_pines_and_a_large_vagina_with_a_toys_into" />
-                    <!-- TODO add main picture downloader method from VM -->
+                        android:text="@{viewModel.text}"
+                        tools:text="bla blas vlasmm kasdkln knaslkdm lkndk madklnas ndmalksdklasndklklmdaklsdlanksdl lkd askld kln asdkn" />
+
+                    <TextView
+                        android:visibility="@{viewModel.urlFieldContent == null ? View.GONE : View.VISIBLE}"
+                        android:text="@{viewModel.urlFieldContent}"
+                        android:onClick="@{(v) -> viewModel.onClick(v,viewModel.urlFieldContent)}"
+                        android:id="@+id/tv_tweet_url_field"
+                        android:textAppearance="@style/Text.Primary"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:layout_marginStart="5dp"
+                        android:paddingEnd="50dp"
+                        android:maxLength="31"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/colorSecondary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="https://example.some.url.1234567890" />
+
                     <ImageView
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="@{(v) -> viewModel.onClick(v,viewModel.profileImageUrl)}"
                         android:id="@+id/iv_main_tweet_picture"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginStart="@dimen/margin_tv"
                         android:layout_marginTop="@dimen/margin_tv"
                         android:layout_marginBottom="@dimen/margin_tv"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/round_shape"
                         android:scaleType="centerCrop"
-                        app:contentImage="@{viewModel.mediaEntitiesUrl}" />
+                        app:contentImage="@{viewModel.mediaEntitiesUrl}"
+                        android:focusable="true" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,6 +138,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
