@@ -10,10 +10,10 @@ import retrofit2.http.Query;
 
 public interface TimelineService {
 
-    @GET("/1.1/statuses/home_timeline.json")
+    @GET("/1.1/statuses/home_timeline.json?tweet_mode=extended")
     Observable<List<TweetModel>> getHomeTimeline(@Query("count") int count);
 
-    @GET("/1.1/statuses/user_timeline.json")
+    @GET("/1.1/statuses/user_timeline.json?tweet_mode=extended")
     Observable<List<TweetModel>> getUserTimeline(@Query("count") int count, @Query("screen_name") String screenName);
 
 }
