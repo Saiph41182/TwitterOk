@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.twitterok.databinding.viewmodel.DataBinderViewModel&lt;com.example.twitterok.model.TweetModel>" />
+            type="com.example.twitterok.databinding.viewmodel.TimelineViewModel" />
 
         <variable
             name="ownerVM"
