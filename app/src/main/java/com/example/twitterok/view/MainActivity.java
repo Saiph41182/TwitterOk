@@ -10,12 +10,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.Toast;
@@ -72,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
         mainDrawer.openDrawer(GravityCompat.START);
     }
 
+    public void fabVisibilityHandle(boolean doVisible){
+        if (doVisible) {
+            floatingActionButton.show();
+        } else {
+            floatingActionButton.hide();
+        }
+    }
+
     private void initNavView(){
         NavDrawerHeaderBinding binding = DataBindingUtil.inflate(getLayoutInflater()
                 ,R.layout.nav_drawer_header
@@ -86,6 +96,14 @@ public class MainActivity extends AppCompatActivity {
         String tag = fragment.getClass().getSimpleName();
         fragmentManager.beginTransaction().replace(R.id.main_frame_layout, fragment, tag).commit();
         fragmentManager.executePendingTransactions();
+    }
+
+    private void startActivity(Class clazz){
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+    }
+    private void testToast(){
+        Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
     }
 
     private OnNavigationItemSelectedListener selectedListener = item -> {
@@ -117,11 +135,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
-    private void startActivity(Class clazz){
-        Intent intent = new Intent(this, clazz);
-        startActivity(intent);
-    }
-    private void testToast(){
-        Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
-    }
 }
