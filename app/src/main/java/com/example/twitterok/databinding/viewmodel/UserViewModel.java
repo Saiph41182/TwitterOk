@@ -51,4 +51,8 @@ public class UserViewModel extends BaseObservable {
         return dateParser.wasCreated();
     }
 
+    @Bindable
+    public String getCreatedAt(){
+        return user.createdAt;
+    }
 }
