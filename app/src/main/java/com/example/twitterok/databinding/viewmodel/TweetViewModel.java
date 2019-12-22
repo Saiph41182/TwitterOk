@@ -9,13 +9,19 @@ import androidx.databinding.Bindable;
 
 import com.example.twitterok.Utils.TwitterDateParser;
 import com.example.twitterok.model.TweetModel;
+import com.example.twitterok.view.BaseFragment;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.twitter.sdk.android.core.TwitterApiClient;
 
 public class TweetViewModel extends BaseObservable {
 
     private TweetModel tweetModel;
+    private BaseFragment.ViewModelClickListener clickListener;
 
-    public TweetViewModel(TweetModel tweetModel) {
+    public TweetViewModel(TweetModel tweetModel, BaseFragment.ViewModelClickListener clickListener) {
         this.tweetModel = tweetModel;
+        this.clickListener = clickListener;
     }
 
     @Bindable public String getAuthor(){
@@ -32,8 +38,11 @@ public class TweetViewModel extends BaseObservable {
         return dateParser.wasPosted();
     }
 
-    @Bindable public String getDiscription(){
-        return tweetModel.text != null ? tweetModel.text : "Today_I_have_gonna_show_you_a_small_pines_and_a_large_vagina_with_a_toys_into";
+    @Bindable public String getText(){
+        return tweetModel.text == null ? null : tweetModel.text.replaceAll("(?i)\\b(" +
+                "(?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)" +
+                "(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|" +
+                "(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»\"\"‘’]))","").trim();
     }
 
     @Bindable public String getLikeCount(){
@@ -61,22 +70,29 @@ public class TweetViewModel extends BaseObservable {
     }
 
     @Bindable public String getMediaEntitiesUrl(){
-        if (tweetModel.extendedEntities == null) return null;
-        return !((tweetModel.extendedEntities.media == null) || (tweetModel.extendedEntities.media.isEmpty()))
-                ? tweetModel.extendedEntities.media.get(0).mediaUrlHttps
-                : null;
+        return (tweetModel.extendedEntities == null
+                || tweetModel.extendedEntities.media == null
+                || tweetModel.extendedEntities.media.isEmpty())
+                ? null : tweetModel.extendedEntities.media.get(0).mediaUrlHttps;
     }
 
-    public void clickOnTweet(View view){
-        temp(view.getContext(),"onTweetClicked");
+    @Bindable public String getUrlFieldContent(){
+        return  (tweetModel.entities == null
+                || tweetModel.entities.urls == null
+                || tweetModel.entities.urls.isEmpty())
+                ? null : tweetModel.entities.urls.get(0).expandedUrl;
     }
-    public void clickOnLike(View view){
-        temp(view.getContext(),"onLikeClicked");
+
+    public String getStringId(){
+        return tweetModel.idStr;
     }
-    public void clickOnProfileImage(View view){
-        temp(view.getContext(), "onProfileImageClicked");
+
+    public String getUserJson(){
+        return new GsonBuilder().create().toJson(tweetModel.user);
     }
-    private void temp(Context context, String text){
-        Toast.makeText(context,text,Toast.LENGTH_SHORT).show();
+
+    public void onClick(View view,String text){
+        clickListener.onClick(view,text);
     }
+
 }
