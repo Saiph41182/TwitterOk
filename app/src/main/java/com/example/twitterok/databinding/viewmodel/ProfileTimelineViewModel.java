@@ -1,33 +1,37 @@
 package com.example.twitterok.databinding.viewmodel;
 
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.library.baseAdapters.BR;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.twitterok.App;
+import androidx.databinding.library.baseAdapters.BR;
+
 import com.example.twitterok.R;
 import com.example.twitterok.model.TweetModel;
 import com.example.twitterok.repository.ProfileTweetsRepository;
-import com.example.twitterok.view.adapters.BaseAdapter;
 import com.example.twitterok.view.adapters.MainAdapter;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 public class ProfileTimelineViewModel extends DataBinderViewModel<TweetModel> {
 
     private ProfileTweetsRepository repository;
+    private Observable<List<TweetModel>> observable;
 
-    public ProfileTimelineViewModel() {
+    public ProfileTimelineViewModel(String screenName) {
         super();
         repository = new ProfileTweetsRepository();
         adapter = new MainAdapter(R.layout.item_tweet_view);
+        initRepoService(screenName);
+    }
+
+    private void initRepoService(String screenName){
+        observable = repository.getData(screenName);
     }
 
     @Override
     public void setUp() {
-        Disposable disposable = repository.getData(App.getOwner().getScreenName())
+        Disposable disposable = observable
                 .doOnSubscribe(result -> setLoading(true))
                 .doOnTerminate(() -> setLoading(false))
                 .subscribe(res -> {
