@@ -51,6 +51,12 @@ public class TwitterApiProvider {
                 .getUser(id);
     }
 
+    public Observable<User> getUser(String screenName){
+        return retrofit
+                .create(UserService.class)
+                .getUser(screenName);
+    }
+
     public Observable<List<TweetModel>> getHomeTimeline(int count){
         return retrofit
                 .create(TimelineService.class)
