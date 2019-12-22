@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#3949AB</color>
+    <color name="colorSecondary">#F44336</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorPartlyTransparent">#4B949494</color>
 
     <color name="light_gray">#D6D6D6</color>
     <color name="gray_dove_light">#949494</color>
