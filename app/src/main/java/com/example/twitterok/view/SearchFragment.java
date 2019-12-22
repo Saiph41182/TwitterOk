@@ -48,6 +48,7 @@ public class SearchFragment extends BaseFragment<User> {
         initViewModel(new SearchUsersViewModel());
         initVariable(binding, com.example.twitterok.BR.viewModel,viewModel);
         initVariable(binding,BR.ownerVM,new OwnerViewModel(App.getOwner()));
+        handleFabVisibility(binding.usersList);
         return binding.getRoot();
     }
 
