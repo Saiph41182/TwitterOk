@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:backgroundTint="?android:attr/windowBackground"
             android:elevation="8dp"
             app:elevation="8dp"
             app:itemIconTint="@drawable/bnv_color_selector"
